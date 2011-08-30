@@ -29,15 +29,14 @@
 		</Command>
 		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
-			print("Second Step executed");
 			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
 			response = card.plainApdu(command);
 		</TechnicalCommand>
 		<ExpectedResult>
 			<Text>SW 9000</Text>
 			<TechnicalResult>
-				assertEquals(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertEquals(NO_DATA, response, FAILURE);
+				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertMatchValue("", response, FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
