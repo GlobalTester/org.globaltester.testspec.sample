@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="ePassport_SelectApplication" xmlns="http://bsi.bund.de/TR03105" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../../../schema/TR03105_Part_3_3.xsd">
-	<Title>Select ePassport Applictaion</Title>
+<TestCase id="nPA_SelectApplication" xmlns="http://bsi.bund.de/TR03105" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../../../schema/TR03105_Part_3_3.xsd">
+	<Title>Select eID Applictaion on nPA</Title>
 	<Version>1.00</Version>
 	<Purpose>Select ePassport application</Purpose>
 	<Profile></Profile>
@@ -25,17 +25,17 @@
 	</TestStep>
 	<TestStep>
 		<Command>
-			<Text>Select ePassport application</Text>
+			<Text>Select eID application</Text>
 		</Command>
-		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
+		<Description>Select the eID application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
+			command = new ByteString("00 A4 04 0C 09 E8 07 04 00 7F 00 07 03 02", HEX);
 			response = card.plainApdu(command);
 		</TechnicalCommand>
 		<ExpectedResult>
 			<Text>SW 9000</Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertStatusWord(new Array("6988"), card.SW.toString(HEX), FAILURE); 
 				assertMatchValue("", response, FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
