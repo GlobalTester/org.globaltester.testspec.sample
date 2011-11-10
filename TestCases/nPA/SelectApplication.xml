@@ -30,7 +30,7 @@
 		<Description>Select the eID application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
 			command = new ByteString("00 A4 04 0C 09 E8 07 04 00 7F 00 07 03 02", HEX);
-			response = card.plainApdu(command);
+			response = card.gt.sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult>
 			<Text>SW 9000</Text>
