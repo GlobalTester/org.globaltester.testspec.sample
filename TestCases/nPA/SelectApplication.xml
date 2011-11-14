@@ -35,7 +35,7 @@
 		<ExpectedResult>
 			<Text>SW 9000</Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("6988"), card.SW.toString(HEX), FAILURE); 
+				assertStatusWord(new Array("6982"), card.SW.toString(HEX), FAILURE); 
 				assertMatchValue("", response, FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
