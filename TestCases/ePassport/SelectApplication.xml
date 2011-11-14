@@ -30,7 +30,7 @@
 		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
 			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
-			response = card.gt.sendCommand(command);
+			response = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult>
 			<Text>SW 9000</Text>
