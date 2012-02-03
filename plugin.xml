@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.globaltester.testspecification.importables">
+      <testspec
+            bundle="org.globaltester.testspec.sample"
+            descr="This test specification contains sevreal testcases that can be used to check the type of a smartcard."
+            name="GlobalTester Sample  TestSpecification">
+      </testspec>
+   </extension>
+
+</plugin>

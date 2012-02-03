@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: GlobalTester Sample TestSpecification
-Bundle-SymbolicName: org.globaltester.testspec.sample
+Bundle-SymbolicName: org.globaltester.testspec.sample;singleton:=true
 Bundle-Version: 3.0.0.qualifier
 Bundle-Vendor: HJP Consulting GmbH
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
