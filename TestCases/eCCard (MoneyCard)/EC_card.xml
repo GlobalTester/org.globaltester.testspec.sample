@@ -40,7 +40,7 @@
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
-		<TestStep>
+	<TestStep>
 		<Command>
 			<Text>Select eC card application</Text>
 		</Command>
@@ -57,8 +57,7 @@
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
-		</TestStep>
-		<TestStep>
+	<TestStep>
 		<Command>
 			<Text>Select </Text>
 		</Command>
@@ -75,8 +74,7 @@
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
-		</TestStep>
-		<TestStep>
+	<TestStep>
 		<Command>
 			<Text></Text>
 		</Command>
