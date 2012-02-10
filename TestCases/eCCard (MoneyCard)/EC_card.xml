@@ -36,13 +36,13 @@
 			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("62", fcp.bytes(1), FAILURE);
+				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select eC card application</Text>
+			<Text>Select AID card application</Text>
 			<APDU sm="false">00 A4 04 04 09 D2 76 00 00 25 45 50 02 00 00</APDU>
 		</Command>
 		<Description>Select the eC card application with a plain SelectApplication APDU</Description>
@@ -51,10 +51,11 @@
 			responce = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
+			<Text>The select command return a byte string (fcp) with first byte as '62'</Text>
 			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("", responce, FAILURE);
+				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -68,10 +69,11 @@
 			fcp = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
+			<Text>The select command return a byte string (fcp) with first byte as '62'</Text>
 			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("62", fcp.bytes(1), FAILURE);
+				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -86,7 +88,9 @@
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<APDU sm="false">90 00</APDU>
+			<Text>The read binary command returns the cash money stored on the card</Text>
 			<TechnicalResult>
+				print ("You have a stored rest of cash money on the card: " + responce.bytes(1,1) + " Euro " + responce.bytes(2,1) + " Cent");
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
 				assertNotMatchValue("", responce, FAILURE);
 			</TechnicalResult>
