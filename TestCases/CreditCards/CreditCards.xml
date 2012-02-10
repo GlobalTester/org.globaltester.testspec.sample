@@ -1,42 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="ePassport_SelectApplication" xmlns="http://bsi.bund.de/TR03105" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../../../schema/TR03105_Part_3_3.xsd">
-	<Title>Select ePassport Applictaion</Title>
+<TestCase id="Select credit card Applictaion" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+	<Title>Select credit card Applictaion</Title>
 	<Version>1.00</Version>
-	<Purpose>Select ePassport application</Purpose>
+	<Purpose>Select credit card application</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition>None</Precondition>
+	<Precondition></Precondition>
 	<TestStep>
-		<Command>
+		<Command xsi:type="APDUCommand">
 			<Text>Reset card</Text>
 		</Command>
-		<Description> Perform a cold reset of the card in order to ensure all temporary data is removed. </Description>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
 		<TechnicalCommand>
-			card = new Card(_reader);
-			
 			print("Reseting chip");
 			atr = card.reset(Card.RESET_COLD);
 			print (atr);
-			
 		</TechnicalCommand>
-		<ExpectedResult>
+		<ExpectedResult xsi:type="APDUResult">
 			<Text>ATR</Text>
 		</ExpectedResult>
 	</TestStep>
 	<TestStep>
-		<Command>
-			<Text>Select ePassport application</Text>
+		<Command xsi:type="APDUCommand">
+			<Text>Select the creditcard application with a plain select Application APDU</Text>
+			<APDU>00 A4 04 00 0E 31 50 41 59 2E 53 59 53 2E 44 44 46 30 31 00</APDU>
 		</Command>
-		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
-			response = card.gt_sendCommand(command);
+			command = new ByteString("00 A4 04 00 0E 31 50 41 59 2E 53 59 53 2E 44 44 46 30 31 00", HEX);
+			fci = card.gt_sendCommand(command);
 		</TechnicalCommand>
-		<ExpectedResult>
-			<Text>SW 9000</Text>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>The select command responces with the fci (file control information). First byte is '6F'</Text>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("", response, FAILURE);
+				assertNotMatchValue("6F", fci.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
