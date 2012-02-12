@@ -33,7 +33,7 @@
 			<Text>The select command responces with the fci (file control information). First byte is '6F'</Text>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertNotMatchValue("6F", fci.bytes(0,1), FAILURE);
+				assertMatchValue("6F", fci.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
