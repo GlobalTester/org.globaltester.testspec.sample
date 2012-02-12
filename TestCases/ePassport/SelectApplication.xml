@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="ePassport_SelectApplication" xmlns="http://bsi.bund.de/TR03105" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../../../schema/TR03105_Part_3_3.xsd">
+<TestCase id="ePassport_SelectApplication" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
 	<Title>Select ePassport Applictaion</Title>
 	<Version>1.00</Version>
 	<Purpose>Select ePassport application</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition>None</Precondition>
+	<Precondition></Precondition>
 	<TestStep>
-		<Command>
-			<Text>Reset card</Text>
+		<Command xsi:type="APDUCommand">
+			<Text>Perform a cold reset of the card in order to ensure all temporary data is removed.</Text>
 		</Command>
-		<Description> Perform a cold reset of the card in order to ensure all temporary data is removed. </Description>
+		<Description>Reset card</Description>
 		<TechnicalCommand>
-			card = new Card(_reader);
-			
 			print("Reseting chip");
 			atr = card.reset(Card.RESET_COLD);
 			print (atr);
-			
 		</TechnicalCommand>
-		<ExpectedResult>
+		<ExpectedResult xsi:type="APDUResult">
 			<Text>ATR</Text>
 		</ExpectedResult>
 	</TestStep>
 	<TestStep>
-		<Command>
+		<Command xsi:type="APDUCommand">
 			<Text>Select ePassport application</Text>
 		</Command>
 		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
@@ -32,7 +29,7 @@
 			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
 			response = card.gt_sendCommand(command);
 		</TechnicalCommand>
-		<ExpectedResult>
+		<ExpectedResult xsi:type="APDUResult">
 			<Text>SW 9000</Text>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
