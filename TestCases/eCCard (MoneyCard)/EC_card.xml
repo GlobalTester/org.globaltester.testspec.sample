@@ -90,7 +90,9 @@
 			<APDU sm="false">90 00</APDU>
 			<Text>The read binary command returns the cash money stored on the card</Text>
 			<TechnicalResult>
+				print ();
 				print ("You have a stored rest of cash money on the card: " + responce.bytes(1,1) + " Euro " + responce.bytes(2,1) + " Cent");
+				print ();
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
 				assertNotMatchValue("", responce, FAILURE);
 			</TechnicalResult>
