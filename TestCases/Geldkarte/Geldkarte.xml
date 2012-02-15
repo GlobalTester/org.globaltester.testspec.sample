@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase id="eC_MoneyCard_SelectApplication" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+	<Title>eC_MoneyCard_SelectApplication</Title>
+	<Version>1.00</Version>
+	<Purpose>Try to find out if the attached card is a ec card (eletronic cash - money card)</Purpose>
+	<Profile></Profile>
+	<Reference></Reference>
+	<Precondition></Precondition>
+	<TestStep>
+		<Command>
+			<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
+		</Command>
+		<TechnicalCommand>
+			card.gt_reset();
+		</TechnicalCommand>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Select the MF (Master File) and get the FCP (file control parameters)</Text>
+			<APDU sm="false">00 A4 00 04 02 3F 00 00</APDU>
+		</Command>
+		<TechnicalCommand>
+			command = new ByteString("00 A4 00 04 02 3F 00 00", HEX);
+			fcp = card.gt_sendCommand(command);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>The select command return a byte string with first byte as '62'</Text>
+			<APDU sm="false">90 00</APDU>
+			<TechnicalResult>
+				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Select AID card application</Text>
+			<APDU sm="false">00 A4 04 04 09 D2 76 00 00 25 45 50 02 00 00</APDU>
+		</Command>
+		<Description>Select the eC card application with a plain SelectApplication APDU</Description>
+		<TechnicalCommand>
+			AID = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
+			responce = card.gt_ISO7816_selectAID(AID);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>The select command return a byte string (fcp) with first byte as '62'</Text>
+			<APDU sm="false">90 00</APDU>
+			<TechnicalResult>
+				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Select file with file id '01 04'</Text>
+			<APDU sm="false">00 A4 02 04 02 01 04 00</APDU>
+		</Command>
+		<TechnicalCommand>
+			command = new ByteString("00 A4 02 04 02 01 04 00", HEX);
+			fcp = card.gt_sendCommand(command);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>The select command return a byte string (fcp) with first byte as '62'</Text>
+			<APDU sm="false">90 00</APDU>
+			<TechnicalResult>
+				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Read binary with file id '01 04' </Text>
+			<APDU sm="false">00 B2 01 04 00</APDU>
+		</Command>
+		<TechnicalCommand>
+			command = new ByteString("00 B2 01 04 00", HEX);
+			responce = card.gt_sendCommand(command);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<APDU sm="false">90 00</APDU>
+			<Text>The read binary command returns the cash money stored on the card</Text>
+			<TechnicalResult>
+				print ();
+				print ("You have a stored rest of cash money on the card: " + responce.bytes(1,1) + " Euro " + responce.bytes(2,1) + " Cent");
+				print ();
+				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertNotMatchValue("", responce, FAILURE);
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+</TestCase>
