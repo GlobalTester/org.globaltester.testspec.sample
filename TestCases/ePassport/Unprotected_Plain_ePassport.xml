@@ -59,7 +59,7 @@
 			var dg1 = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>SW 9000</Text>
+			<Text>61 90 00</Text>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 				assertMatchValue("61", dg1, FAILURE); 
@@ -80,7 +80,7 @@
 			var dg2 = card.gt_ISO7816_readBinary(P1,P2,data,le);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>SW 9000</Text>
+			<Text>75 90 00</Text>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 				assertMatchValue("75", dg2, FAILURE); 
