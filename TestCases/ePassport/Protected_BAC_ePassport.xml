@@ -5,29 +5,40 @@
 	<Purpose>Try to identifying if the connected ePassport is a protected BAC ePassport</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition>
-		<Command>
-			<Text>Reset card</Text>
-		</Command>
-		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
+	<Precondition>	
+		<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
 	</Precondition>
-	<TestStep>
-		<Command>
-			<Text>Select ePassport application</Text>
-		</Command>
-		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
+	<Precondition>
+		<Command xsi:type="APDUCommand">
+			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
+			<APDU sm="false">00 A4 04 0C 07 A0 00 00 02 47 10 01</APDU>
+		</Command>	
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
-			response = card.gt_sendCommand(command);
+			card.gt_BAC_selectApplicationEPASS();
+		</TechnicalCommand>
+	</Precondition>
+	<Precondition>
+		<Command xsi:type="APDUCommand">
+			<Text>Perform BAC</Text>
+		</Command>	
+		<TechnicalCommand><![CDATA[
+			card.gt_BAC_performBAC("P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<C11T002JM4D<<9608122F1310317<<<<<<<<<<<<<<<6");
+		]]></TechnicalCommand>
+	</Precondition>
+	<TestStep>
+		<Description>Check the very first byte of the EF.DG1 element</Description>
+		<TechnicalCommand>
+			AID = new ByteString("A0 00 00 02 47 10 01",HEX); 
+			card.gt_ISO7816_selectAID(AID);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>SW 9000</Text>
+			<Text>First byte MUST be '61'</Text>
 			<TechnicalResult>
-				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("", response, FAILURE);
+				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE);
+				//assertMatchValue("61", dg1.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
