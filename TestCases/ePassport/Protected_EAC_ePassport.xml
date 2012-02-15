@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase id="Protected_EAC_ePassport" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+	<Title>Check if the ePassport is EAC protected</Title>
+	<Version>1.00</Version>
+	<Purpose>Try to identifying if the connected ePassport is a protected EAC ePassport</Purpose>
+	<Profile></Profile>
+	<Reference></Reference>
+	<Precondition>
+		<Command>
+			<Text>Reset card</Text>
+		</Command>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
+		<TechnicalCommand>
+			card.gt_reset();
+		</TechnicalCommand>
+	</Precondition>
+	<TestStep>
+		<Command>
+			<Text>Select ePassport application</Text>
+		</Command>
+		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
+		<TechnicalCommand>
+			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
+			response = card.gt_sendCommand(command);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>SW 9000</Text>
+			<TechnicalResult>
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
+				assertMatchValue("", response, FAILURE);
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+</TestCase>
