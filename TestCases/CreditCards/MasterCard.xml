@@ -20,7 +20,7 @@
 			<APDU>00 A4 04 00 05 A000000004 00</APDU>
 		</Command>
 		<TechnicalCommand>
-			fci = card.gt_selectAID("A000000004");
+			fci = card.gt_ISO7816_selectAID("A000000004");
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>SW 9000</Text>
