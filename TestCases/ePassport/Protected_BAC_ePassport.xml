@@ -29,16 +29,22 @@
 		]]></TechnicalCommand>
 	</Precondition>
 	<TestStep>
-		<Description>Check the very first byte of the EF.DG1 element</Description>
+		<Command>
+			<Text>Read first byte of EF.DG2 from ePassport</Text>
+		</Command>
+		<Description>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Description>
 		<TechnicalCommand>
-			AID = new ByteString("A0 00 00 02 47 10 01",HEX); 
-			card.gt_ISO7816_selectAID(AID);
+			var P1 = "82";
+			var P2 = "00";
+			var data = null;
+			var le = "01";
+			var dg2 = card.gt_ISO7816_readBinary(P1,P2,data,le);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>First byte MUST be '61'</Text>
+			<Text>First byte MUST be '75'</Text>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE);
-				//assertMatchValue("61", dg1.bytes(0,1), FAILURE);
+				assertMatchValue("75 90 00", dg2, FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
