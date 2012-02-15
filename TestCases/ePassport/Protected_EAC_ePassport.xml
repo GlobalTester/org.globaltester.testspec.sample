@@ -5,29 +5,45 @@
 	<Purpose>Try to identifying if the connected ePassport is a protected EAC ePassport</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition>
-		<Command>
-			<Text>Reset card</Text>
-		</Command>
-		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
+	<Precondition>	
+		<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
 	</Precondition>
+	<Precondition>
+		<Command xsi:type="APDUCommand">
+			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
+			<APDU sm="false">00 A4 04 0C 07 A0 00 00 02 47 10 01</APDU>
+		</Command>	
+		<TechnicalCommand>
+			card.gt_BAC_selectApplicationEPASS();
+		</TechnicalCommand>
+	</Precondition>
+	<Precondition>
+		<Command xsi:type="APDUCommand">
+			<Text>Perform BAC</Text>
+		</Command>	
+		<TechnicalCommand><![CDATA[
+			card.gt_BAC_performBAC("P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<C11T002JM4D<<9608122F1310317<<<<<<<<<<<<<<<6");
+		]]></TechnicalCommand>
+	</Precondition>
 	<TestStep>
 		<Command>
-			<Text>Select ePassport application</Text>
+			<Text>Read first byte of EF.DG3 from ePassport</Text>
 		</Command>
-		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
+		<Description>Send read binary command and try to read first byte of EF.DG3.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
-			response = card.gt_sendCommand(command);
+			var P1 = "83";
+			var P2 = "00";
+			var data = null;
+			var le = "01";
+			var dg3 = card.gt_ISO7816_readBinary(P1,P2,data,le);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>SW 9000</Text>
+			<Text>In the case the EF.DG3 (fingerprints) is EAC protected the ePassport returns a SW '6982'</Text>
 			<TechnicalResult>
-				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("", response, FAILURE);
+				assertStatusWord(new Array("6982"), card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
