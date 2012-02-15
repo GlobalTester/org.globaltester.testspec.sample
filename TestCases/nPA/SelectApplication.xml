@@ -2,32 +2,26 @@
 <TestCase id="nPA_SelectApplication" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
 	<Title>Select eID Applictaion on nPA</Title>
 	<Version>1.00</Version>
-	<Purpose>Select ePassport application</Purpose>
+	<Purpose>Select eID application on nPA</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition></Precondition>
-	<TestStep>
-		<Command xsi:type="APDUCommand">
+	<Precondition>
+		<Command>
 			<Text>Reset card</Text>
 		</Command>
 		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
 		<TechnicalCommand>
-			print("Reseting chip");
-			atr = card.reset(Card.RESET_COLD);
-			print (atr);
+			card.gt_reset();
 		</TechnicalCommand>
-		<ExpectedResult xsi:type="APDUResult">
-			<Text>ATR</Text>
-		</ExpectedResult>
-	</TestStep>
+	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select eID application</Text>
 		</Command>
 		<Description>Select the eID application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 0C 09 E8 07 04 00 7F 00 07 03 02", HEX);
-			response = card.gt_sendCommand(command);
+			var aid = "E8 07 04 00 7F 00 07 03 02";
+			card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>SW 9000</Text>
