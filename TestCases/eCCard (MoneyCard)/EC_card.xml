@@ -7,20 +7,12 @@
 	<Reference></Reference>
 	<Precondition></Precondition>
 	<TestStep>
-		<Command xsi:type="APDUCommand">
+		<Command>
 			<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
 		</Command>
 		<TechnicalCommand>
-			print("Reseting chip");
-			atr = card.reset(Card.RESET_COLD);
-			print ("Answer to Reset (ATR)"+atr);
+			card.gt_reset();
 		</TechnicalCommand>
-		<ExpectedResult xsi:type="APDUResult">
-			<Text>The smart card responces with the atr</Text>
-			<TechnicalResult>
-				assertNotMatchValue("", atr, FAILURE);
-			</TechnicalResult>
-		</ExpectedResult>
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
@@ -47,8 +39,8 @@
 		</Command>
 		<Description>Select the eC card application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 04 09 D2 76 00 00 25 45 50 02 00 00", HEX);
-			responce = card.gt_sendCommand(command);
+			AID = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
+			responce = card.gt_ISO7816_selectAID(AID);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>The select command return a byte string (fcp) with first byte as '62'</Text>
