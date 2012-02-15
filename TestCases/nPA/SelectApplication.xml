@@ -17,8 +17,9 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select eID application</Text>
+			<APDU>00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
-		<Description>Select the eID application with a plain SelectApplication APDU</Description>
+		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
 			var aid = "E8 07 04 00 7F 00 07 03 02";
 			card.gt_ISO7816_selectAID(aid);
