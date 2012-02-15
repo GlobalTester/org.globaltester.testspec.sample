@@ -1,40 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="Select eGK " xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
-	<Title>Select ePassport Applictaion</Title>
+<TestCase id="eGK" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+	<Title>Check select and read records on eGK (elektronische Gesundheitskarte)</Title>
 	<Version>1.00</Version>
-	<Purpose>Select ePassport application</Purpose>
+	<Purpose>Try to select files and read records on the german eGK (elektronische Gesundheitskarte)</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition></Precondition>
-	<TestStep>
-		<Command xsi:type="APDUCommand">
-			<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
+	<Precondition>
+		<Command>
+			<Text>Reset card</Text>
 		</Command>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
 		<TechnicalCommand>
-			print("Reseting chip");
-			atr = card.reset(Card.RESET_COLD);
-			print ("Answer to Reset (ATR)"+atr);
+			card.gt_reset();
 		</TechnicalCommand>
-		<ExpectedResult xsi:type="APDUResult">
-			<Text>The smart card responces with the atr</Text>
-			<TechnicalResult>
-				assertNotMatchValue("", atr, FAILURE);
-			</TechnicalResult>
-		</ExpectedResult>
-	</TestStep>
+	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select eGK DF</Text>
+			<Text>Select the Master file with a plain select File command, Select eGK DF</Text>
+			<APDU>00 A4 02 04 {{lc} {fid}} 00</APDU>
 		</Command>
+		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
 			command = new ByteString("00 A4 02 04 02 2F 00 00", HEX);
-			fcp = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -43,14 +35,12 @@
 			<Text>Read record no. 1</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 01 04 00 00 00", HEX);
+			command = new ByteString("00 B2 01 04 00", HEX);
 			rec = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("61", rec.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -59,14 +49,12 @@
 			<Text>Read record no. 2</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 02 04 00 00 00", HEX);
+			command = new ByteString("00 B2 02 04 00", HEX);
 			rec = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("61", rec.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -75,14 +63,12 @@
 			<Text>Read record no. 3</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 03 04 00 00 00", HEX);
+			command = new ByteString("00 B2 03 04 00", HEX);
 			rec = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("61", rec.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -91,14 +77,12 @@
 			<Text>Read record no. 4</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 04 04 00 00 00", HEX);
+			command = new ByteString("00 B2 04 04 00", HEX);
 			rec = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("61", rec.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -107,14 +91,12 @@
 			<Text>Read record no. 5</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 05 04 00 00 00", HEX);
+			command = new ByteString("00 B2 05 04 00", HEX);
 			rec = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("61", rec.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -123,14 +105,12 @@
 			<Text>Read record no. 6</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 06 04 00 00 00", HEX);
+			command = new ByteString("00 B2 06 04 00", HEX);
 			rec = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("61", rec.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
@@ -139,30 +119,26 @@
 			<Text>Read record no. 7</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 07 04 00 00 00", HEX);
+			command = new ByteString("00 B2 07 04 00", HEX);
 			rec = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text> </Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("61", rec.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select DF.ESIGN, the FID returned in record no. 3 (TestStep 5) is used</Text>
+			<Text>Select DF.ESIGN, use FID returned in record no. 3 (TestStep 5) and is coded in the file control information</Text>
 		</Command>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 04 0A A0 00 00 01 67 45 53 49 47 4E 00", HEX);
-			fcp = card.gt_sendCommand(command);
+			aid = "A0 00 00 01 67 45 53 49 47 4E";
+			card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>If DF.ESIGN exist on card the fcp is returned</Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
