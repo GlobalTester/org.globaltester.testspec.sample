@@ -36,7 +36,7 @@
 		</Command>
 		<TechnicalCommand>
 			command = new ByteString("00 B2 01 04 00", HEX);
-			rec = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<TechnicalResult>
@@ -50,7 +50,7 @@
 		</Command>
 		<TechnicalCommand>
 			command = new ByteString("00 B2 02 04 00", HEX);
-			rec = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<TechnicalResult>
@@ -64,7 +64,7 @@
 		</Command>
 		<TechnicalCommand>
 			command = new ByteString("00 B2 03 04 00", HEX);
-			rec = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<TechnicalResult>
@@ -78,7 +78,7 @@
 		</Command>
 		<TechnicalCommand>
 			command = new ByteString("00 B2 04 04 00", HEX);
-			rec = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<TechnicalResult>
@@ -92,7 +92,7 @@
 		</Command>
 		<TechnicalCommand>
 			command = new ByteString("00 B2 05 04 00", HEX);
-			rec = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<TechnicalResult>
@@ -106,7 +106,7 @@
 		</Command>
 		<TechnicalCommand>
 			command = new ByteString("00 B2 06 04 00", HEX);
-			rec = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<TechnicalResult>
@@ -120,7 +120,7 @@
 		</Command>
 		<TechnicalCommand>
 			command = new ByteString("00 B2 07 04 00", HEX);
-			rec = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<TechnicalResult>
