@@ -2,7 +2,7 @@
 <TestCase id="VISA" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
 	<Title>Check select VISA Card AID</Title>
 	<Version>1.00</Version>
-	<Purpose>Try to select the EMV application with the VISA Card ID. This is a way of identifying the type of the connected card.</Purpose>
+	<Purpose>Try to select the EMV application with the VISA Card AID. This is a way of identifying the type of the connected card.</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>
@@ -19,10 +19,10 @@
 			<Text>Select the EMV application with a plain select Application APDU</Text>
 			<APDU>00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
-		<Description>{lc} defines the length of the given {aid}</Description>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
-			card.gt_ISO7816_selectAID("A000000003");
+			var aid = "A0 00 00 00 03";
+			card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>{fci} 90 00</Text>

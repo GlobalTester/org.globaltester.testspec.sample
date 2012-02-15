@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="MasterCard" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
-	<Title>Check select MasterCard AID</Title>
+<TestCase id="AmericanExpress" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+	<Title>Check select American Express AID</Title>
 	<Version>1.00</Version>
-	<Purpose>Try to select the EMV application with the MasterCard AID. This is a way of identifying the type of the connected card.</Purpose>
+	<Purpose>Try to select the EMV application with the American Express Card AID. This is a way of identifying the type of the connected card.</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>
@@ -21,7 +21,7 @@
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
-			var aid = "A0 00 00 00 04";
+			var aid = "A0 00 00 00 25";
 			card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
