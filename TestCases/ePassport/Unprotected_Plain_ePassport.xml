@@ -15,19 +15,51 @@
 		</TechnicalCommand>
 	</Precondition>
 	<TestStep>
-		<Command>
+		<Command xsi:type="APDUCommand">
 			<Text>Select ePassport application</Text>
 		</Command>
 		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 04 0C 07 A0 00 00 02 47 10 01", HEX);
-			response = card.gt_sendCommand(command);
+			var aid = "A0 00 00 02 47 10 01";
+			card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>SW 9000</Text>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("", response, FAILURE);
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Select file EF.DG1 with file ID</Text>
+		</Command>
+		<Description>Select the file EF.DG1 with a plain select APDU</Description>
+		<TechnicalCommand>
+			command = new ByteString("00 A4 02 0C 02 01 01", HEX);
+			card.gt_sendCommand(command);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>SW 9000</Text>
+			<TechnicalResult>
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Send read binary command to read the first byte of EF.DG1</Text>
+		</Command>
+		<Description>Send read binary command to read first byte of EF.DG1. First byte must be '61'</Description>
+		<TechnicalCommand>
+			command = new ByteString("00 B0 00 00 01", HEX);
+			var dg1 = card.gt_sendCommand(command);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>SW 9000</Text>
+			<TechnicalResult>
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
+				assertMatchValue("61", dg1, FAILURE); 
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
