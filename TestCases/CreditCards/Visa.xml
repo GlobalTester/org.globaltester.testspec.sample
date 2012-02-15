@@ -16,17 +16,16 @@
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select the creditcard application with a plain select Application APDU</Text>
+			<Text>Select the creditcard application with a plain select Application APDU, the card returned the {fci}</Text>
 			<APDU>00 A4 04 00 05 A000000003 00</APDU>
 		</Command>
 		<TechnicalCommand>
-			AID = new ByteString("A000000003",HEX); 
-			card.gt_ISO7816_selectAID(AID);
+			fci = card.gt_selectAID("A000000003");
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>SW 9000</Text>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
