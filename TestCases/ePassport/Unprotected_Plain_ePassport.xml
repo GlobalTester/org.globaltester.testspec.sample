@@ -17,8 +17,9 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select ePassport application</Text>
+			<APDU>00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
-		<Description>Select the ePassport application with a plain SelectApplication APDU</Description>
+		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
 			var aid = "A0 00 00 02 47 10 01";
 			card.gt_ISO7816_selectAID(aid);
@@ -33,6 +34,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select file EF.DG1 with file ID</Text>
+			<APDU>00 A4 02 0C 02 01 01<APDU>
 		</Command>
 		<Description>Select the file EF.DG1 with a plain select APDU</Description>
 		<TechnicalCommand>
@@ -49,6 +51,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Send read binary command to read the first byte of EF.DG1</Text>
+			<APDU>00 B0 00 00 01<APDU>
 		</Command>
 		<Description>Send read binary command to read first byte of EF.DG1. First byte must be '61'</Description>
 		<TechnicalCommand>
@@ -60,6 +63,27 @@
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 				assertMatchValue("61", dg1, FAILURE); 
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Send read binary command to read the first byte of EF.DG2</Text>
+			<APDU>00 B0 82 00 01<APDU>
+		</Command>
+		<Description>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Description>
+		<TechnicalCommand>
+			var P1 = "82";
+			var P2 = "00";
+			var data = null;
+			var le = "01";
+			var dg2 = card.gt_ISO7816_readBinary(P1,P2,data,le);
+		</TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>SW 9000</Text>
+			<TechnicalResult>
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
+				assertMatchValue("75", dg2, FAILURE); 
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
