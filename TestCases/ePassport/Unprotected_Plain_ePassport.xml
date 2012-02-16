@@ -14,62 +14,53 @@
 			card.gt_reset();
 		</TechnicalCommand>
 	</Precondition>
-	<TestStep>
-		<Command xsi:type="APDUCommand">
-			<Text>Select ePassport application</Text>
-			<APDU>00 A4 04 00 {{lc} {aid}} 00</APDU>
-		</Command>
-		<Description>{aid} defines the application ID</Description>
+	<Precondition>
+		<Command>
+			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
+		</Command>	
 		<TechnicalCommand>
-			var aid = "A0 00 00 02 47 10 01";
-			card.gt_ISO7816_selectAID(aid);
+			card.gt_BAC_selectApplicationEPASS();
 		</TechnicalCommand>
-		<ExpectedResult xsi:type="APDUResult">
-			<Text>SW 9000</Text>
-			<TechnicalResult>
-				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
-			</TechnicalResult>
-		</ExpectedResult>
-	</TestStep>
+	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select file EF.DG1 with file ID</Text>
-			<APDU>00 A4 02 0C 02 01 01<APDU>
+			<APDU sm="false">00 A4 02 0C {{lc} {fid}}</APDU>
 		</Command>
 		<Description>Select the file EF.DG1 with a plain select APDU</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 02 0C 02 01 01", HEX);
+			var command = new ByteString("00 A4 02 0C 02 01 01", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>SW 9000</Text>
 			<TechnicalResult>
-				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Send read binary command to read the first byte of EF.DG1</Text>
-			<APDU>00 B0 00 00 01<APDU>
+			<Text>Send plain read binary command to read the first byte of EF.DG1</Text>
+			<APDU sm="false">00 B0 00 00 01</APDU>
 		</Command>
 		<Description>Send read binary command to read first byte of EF.DG1. First byte must be '61'</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B0 00 00 01", HEX);
+			var command = new ByteString("00 B0 00 00 01", HEX);
 			var dg1 = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>61 90 00</Text>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
-				assertMatchValue("61", dg1, FAILURE); 
+				assertMatchValue("61", dg1, FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Send read binary command to read the first byte of EF.DG2</Text>
-			<APDU>00 B0 82 00 01<APDU>
+			<Text>Send plain read binary command to read the first byte of EF.DG2</Text>
+			<APDU sm="false">00 B0 82 00 01</APDU>
 		</Command>
 		<Description>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Description>
 		<TechnicalCommand>
