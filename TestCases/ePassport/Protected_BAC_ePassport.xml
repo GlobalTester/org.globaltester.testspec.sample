@@ -36,9 +36,9 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Text>
-			<APDU>00 B0 {fid} 00 {le}</APDU>
+			<APDU>00 B0 {sfid} {offset} {le}</APDU>
 		</Command>
-		<Description>{fid} defines file id to implicit select and read file</Description>
+		<Description>{sfid} defines short file id to implicit select and read file EF.DG2 with {offset} and expected {le} bytes</Description>
 		<TechnicalCommand>
 			var P1 = "82";
 			var P2 = "00";
