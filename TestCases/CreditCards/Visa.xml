@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="VISA" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+<TestCase id="Visa" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
 	<Title>Check select VISA Card AID</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to select the EMV application with the VISA Card AID. This is a way of identifying the type of the connected card.</Purpose>
@@ -17,7 +17,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the EMV application with a plain select Application APDU</Text>
-			<APDU>00 A4 04 00 {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
