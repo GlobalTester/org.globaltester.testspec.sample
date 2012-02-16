@@ -12,27 +12,33 @@
 		</TechnicalCommand>
 	</Precondition>
 	<Precondition>
-		<Command xsi:type="APDUCommand">
+		<Command>
 			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
-			<APDU sm="false">00 A4 04 0C 07 A0 00 00 02 47 10 01</APDU>
 		</Command>	
 		<TechnicalCommand>
 			card.gt_BAC_selectApplicationEPASS();
 		</TechnicalCommand>
 	</Precondition>
 	<Precondition>
-		<Command xsi:type="APDUCommand">
+		<Command>
 			<Text>Perform BAC</Text>
 		</Command>	
 		<TechnicalCommand><![CDATA[
-			card.gt_BAC_performBAC("P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<C11T002JM4D<<9608122F1310317<<<<<<<<<<<<<<<6");
+			// ###################################################
+			// ## Please input here mrz from your own ePassport ##
+			// ###################################################
+			var MRZ1 = "P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<";
+			var MRZ2 = "C11T002JM4D<<9608122F1310317<<<<<<<<<<<<<<<6";
+			var mrz = MRZ1.concat(MRZ2);
+			card.gt_BAC_performBAC(mrz);
 		]]></TechnicalCommand>
 	</Precondition>
 	<TestStep>
-		<Command>
-			<Text>Read first byte of EF.DG2 from ePassport</Text>
+		<Command xsi:type="APDUCommand">
+			<Text>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Text>
+			<APDU>00 B0 {fid} 00 {le}</APDU>
 		</Command>
-		<Description>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Description>
+		<Description>{fid} defines file id to implicit select and read file</Description>
 		<TechnicalCommand>
 			var P1 = "82";
 			var P2 = "00";
@@ -41,7 +47,8 @@
 			var dg2 = card.gt_ISO7816_readBinary(P1,P2,data,le);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>First byte MUST be '75'</Text>
+			<Text>The returning byte MUST be '75'</Text>
+			<APDU>75 90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE);
 				assertMatchValue("75 90 00", dg2, FAILURE);
