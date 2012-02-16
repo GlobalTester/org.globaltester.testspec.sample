@@ -4,7 +4,8 @@
 	<Version>1.00</Version>
 	<Purpose>Try to select files and read records on the german eGK (elektronische Gesundheitskarte)</Purpose>
 	<Profile></Profile>
-	<Reference>DUT card identification number: starts with 802760 and ends with 706</Reference>
+	<Reference>DUT (device under test) card identification number: starts with 802760 and ends with 706.
+	Maybe other eGK cards in use have another file structure. This can results in test steps failures</Reference>
 	<Precondition>
 		<Command>
 			<Text>Reset card</Text>
@@ -17,12 +18,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the Master file with a plain select File command, select eGK DF</Text>
-			<APDU>00 A4 02 04 {{lc} {fid}} 00</APDU>
+			<APDU sm="false">00 A4 02 04 {{lc} {fid}} 00</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 A4 02 04 02 2F 00 00", HEX);
+			var command = new ByteString("00 A4 02 04 02 2F 00 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -34,12 +35,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to read record no. 1 if exist</Text>
-			<APDU>00 B2 {record number} 04 {le}</APDU>
+			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{record number} defines the underlying record no.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 01 04 00", HEX);
+			var command = new ByteString("00 B2 01 04 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -51,12 +52,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to read record no. 2 if exist</Text>
-			<APDU>00 B2 {record number} 04 {le}</APDU>
+			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{record number} defines the underlying record no.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 02 04 00", HEX);
+			var command = new ByteString("00 B2 02 04 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -68,12 +69,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to read record no. 3 if exist</Text>
-			<APDU>00 B2 {record number} 04 {le}</APDU>
+			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{record number} defines the underlying record no.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 03 04 00", HEX);
+			var command = new ByteString("00 B2 03 04 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -85,12 +86,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to read record no. 4 if exist</Text>
-			<APDU>00 B2 {record number} 04 {le}</APDU>
+			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{record number} defines the underlying record no.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 04 04 00", HEX);
+			var command = new ByteString("00 B2 04 04 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -102,12 +103,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to read record no. 5 if exist</Text>
-			<APDU>00 B2 {record number} 04 {le}</APDU>
+			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{record number} defines the underlying record no.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 05 04 00", HEX);
+			var command = new ByteString("00 B2 05 04 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -119,12 +120,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to read record no. 6 if exist</Text>
-			<APDU>00 B2 {record number} 04 {le}</APDU>
+			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{record number} defines the underlying record no.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 06 04 00", HEX);
+			var command = new ByteString("00 B2 06 04 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -136,12 +137,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to read record no. 7 if exist</Text>
-			<APDU>00 B2 {record number} 04 {le}</APDU>
+			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{record number} defines the underlying record no.</Description>
 		<TechnicalCommand>
-			command = new ByteString("00 B2 07 04 00", HEX);
+			var command = new ByteString("00 B2 07 04 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -153,7 +154,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select DF.ESIGN, use AID returned in record no. 3 on the readRecord command (TestStep 5)</Text>
-			<APDU>00 A4 04 00 {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
 		<TestDataReference>This test step was developed and results postitive on a German DAK (Deutsche Angestellten Krankenkasse). Card identification number: 802760..706</TestDataReference>
 		<Description>{aid} defines the application ID</Description>
