@@ -36,7 +36,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Text>
-			<APDU>00 B0 {sfid} {offset} {le}</APDU>
+			<APDU sm="true">00 B0 {sfid} {offset} {le}</APDU>
 		</Command>
 		<Description>{sfid} defines short file id to implicit select and read file EF.DG2 with {offset} and expected {le} bytes</Description>
 		<TechnicalCommand>
@@ -48,7 +48,7 @@
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>The returning byte MUST be '75'</Text>
-			<APDU>75 90 00</APDU>
+			<APDU sm="true">75 90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE);
 				assertMatchValue("75 90 00", dg2, FAILURE);
