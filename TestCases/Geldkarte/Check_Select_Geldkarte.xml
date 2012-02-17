@@ -46,7 +46,7 @@
 			<Text>The select command return a byte string with first byte as '6F' identifying FCI template</Text>
 			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE); 
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
 				assertMatchValue("6F", fci.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
