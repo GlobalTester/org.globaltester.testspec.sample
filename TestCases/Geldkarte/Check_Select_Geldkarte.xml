@@ -5,20 +5,20 @@
 	<Purpose>Try to find out if the attached card is a ec card (eletronic cash - money card)</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition></Precondition>
-	<TestStep>
+	<Precondition>
 		<Command>
 			<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
 		</Command>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
-	</TestStep>
+	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the MF (Master File) with returning FCP (file control parameters)</Text>
-			<APDU sm="false">00 A4 00 04 02 3F 00 00</APDU>
+			<APDU sm="false">00 A4 00 04 {lc} {fid} {le}</APDU>
 		</Command>
+		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
 			var command = new ByteString("00 A4 00 04 02 3F 00 00", HEX);
 			var fcp = card.gt_sendCommand(command);
@@ -35,12 +35,12 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select AID card application</Text>
-			<APDU sm="false">00 A4 04 04 09 D2 76 00 00 25 45 50 02 00 00</APDU>
+			<APDU sm="false">00 A4 04 04 {lc} {aid} {le}</APDU>
 		</Command>
-		<Description>Select the eC card application with a plain SelectApplication APDU</Description>
+		<Description>Select the eC card application with following {aid} in a plain SelectApplication APDU</Description>
 		<TechnicalCommand>
-			var AID = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
-			var fci = card.gt_ISO7816_selectAID(AID);
+			var aid = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
+			var fci = card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>The select command return a byte string with first byte as '6F' identifying FCI template</Text>
