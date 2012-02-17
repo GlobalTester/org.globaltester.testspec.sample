@@ -34,7 +34,7 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select AID card application</Text>
+			<Text>Select card application with AID</Text>
 			<APDU sm="false">00 A4 04 04 {lc} {aid} {le}</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SelectApplication APDU</Description>
