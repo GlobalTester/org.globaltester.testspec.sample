@@ -25,7 +25,8 @@
 			card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>{fci} 90 00</Text>
+			<Text></Text>
+			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
 			</TechnicalResult>
