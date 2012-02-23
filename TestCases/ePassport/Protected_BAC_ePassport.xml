@@ -23,35 +23,22 @@
 		<Command>
 			<Text>Perform BAC</Text>
 		</Command>	
-		<TechnicalCommand><![CDATA[
-			// ###################################################
-			// ## Please input here mrz from your own ePassport ##
-			// ###################################################
-			var MRZ1 = "P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<";
-			var MRZ2 = "C11T002JM4D<<9608122F1310317<<<<<<<<<<<<<<<6";
-			var mrz = MRZ1.concat(MRZ2);
+		<TechnicalCommand>
+			var mrz = card.gt_getCardConfig("ICAO9303","MRZ");
 			card.gt_BAC_performBAC(mrz);
-		]]></TechnicalCommand>
+		</TechnicalCommand>
 	</Precondition>
 	<TestStep>
-		<Command xsi:type="APDUCommand">
-			<Text>Send read binary command to read first byte of EF.DG2. First byte must be '75'</Text>
-			<APDU sm="true">00 B0 {sfid} {offset} {le}</APDU>
-		</Command>
-		<Description>{sfid} defines short file id to implicit select and read file EF.DG2 with {offset} and expected {le} bytes</Description>
+		<Description>Encoded EF.DG2 object in binary format as read from the e-Passport</Description>
 		<TechnicalCommand>
-			var P1 = "82";
-			var P2 = "00";
-			var data = null;
-			var le = "01";
-			var dg2 = card.gt_ISO7816_readBinary(P1,P2,data,le);
+			var dg2 = card.gt_ISO7816_readFile("02");
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>The returning byte MUST be '75'</Text>
-			<APDU sm="true">75 90 00</APDU>
+			<APDU sm="true">75</APDU>
 			<TechnicalResult>
-				assertStatusWord(new Array("9000"), card.SW.toString(HEX), FAILURE);
-				assertMatchValue("75 90 00", dg2, FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
+				assertMatchValue("75", dg2.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
