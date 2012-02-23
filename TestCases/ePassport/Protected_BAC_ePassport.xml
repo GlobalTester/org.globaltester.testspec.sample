@@ -29,12 +29,12 @@
 		</TechnicalCommand>
 	</Precondition>
 	<TestStep>
-		<Description>Encoded EF.DG2 object in binary format as read from the e-Passport</Description>
+		<Description>Read encoded EF.DG2 object in binary format from the e-Passport</Description>
 		<TechnicalCommand>
 			var dg2 = card.gt_ISO7816_readFile("02");
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>The returning byte MUST be '75'</Text>
+			<Text>The returning byte MUST be '75'. Template tag of EF.DG2</Text>
 			<APDU sm="true">75</APDU>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
