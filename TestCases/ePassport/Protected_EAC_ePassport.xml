@@ -16,7 +16,7 @@
 	<Precondition>
 		<Command>
 			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
-		</Command>
+		</Command>	
 		<TechnicalCommand>
 			card.gt_BAC_selectApplicationEPASS();
 		</TechnicalCommand>
@@ -25,34 +25,29 @@
 		<Command>
 			<Text>Perform BAC</Text>
 		</Command>	
-		<TechnicalCommand><![CDATA[
-			// ###################################################
-			// ## Please input here mrz from your own ePassport ##
-			// ###################################################
-			var MRZ1 = "P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<";
-			var MRZ2 = "C11T002JM4D<<9608122F1310317<<<<<<<<<<<<<<<6";
-			var mrz = MRZ1.concat(MRZ2);
+		<TechnicalCommand>
+			var mrz = card.gt_getCardConfig("ICAO9303","MRZ");
 			card.gt_BAC_performBAC(mrz);
-		]]></TechnicalCommand>
+		</TechnicalCommand>
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Read first byte of EF.DG3 from ePassport</Text>
 			<APDU sm="true">00 B0 {sfid} {offset} {le}</APDU>
 		</Command>
-		<Description>{sfid} defines short file id to implicit select and read binary EF.DG2 with {offset} and expected {le} bytes</Description>
-		<Description>Send read binary command and try to read first byte of EF.DG3.
+		<Description>{sfid} defines short file id to implicit select and read binary EF.DG3 with {offset} and expected {le} bytes</Description>
+		<Description>Send ReadBinary command and try to read first byte of EF.DG3.
 		If the ePassport and the file EF.DG3 is EAC protected the ePassport must return SW '69 82'
 		(Security conditions not fullfilled.</Description>
 		<TechnicalCommand>
 			var P1 = "83";
 			var P2 = "00";
-			var data = null;
 			var le = "01";
-			var dg3 = card.gt_ISO7816_readBinary(P1,P2,data,le);
+			var command = new ByteString("00 B0 83 00 01", HEX);
+			var dg3 = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>In the case the EF.DG3 (fingerprints) are EAC protected the ePassport must returns SW '6982'</Text>
+			<Text>In the case the EF.DG3 (fingerprints) are EAC protected the ePassport must returns SW '6982'. If ePassport responces with SW '6a82' means file not found</Text>
 			<APDU sm="true">69 82</APDU>
 			<TechnicalResult>
 				assertStatusWord(new Array("6982"), card.SW.toString(HEX), FAILURE);
