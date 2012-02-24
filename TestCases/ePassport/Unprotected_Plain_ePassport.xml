@@ -16,7 +16,7 @@
 	</Precondition>
 	<Precondition>
 		<Command>
-			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
+			<Text>Select the ePassport application with a plain SELECT Application APDU</Text>
 		</Command>	
 		<TechnicalCommand>
 			card.gt_BAC_selectApplicationEPASS();
@@ -27,7 +27,7 @@
 			<Text>Select file EF.DG1 with {fid}</Text>
 			<APDU sm="false">00 A4 02 0C {{lc} {fid}}</APDU>
 		</Command>
-		<Description>Select the file EF.DG1 with a plain SelectApplication APDU</Description>
+		<Description>Select the file EF.DG1 with a plain SELECT file APDU</Description>
 		<TechnicalCommand>
 			var command = new ByteString("00 A4 02 0C 02 01 01", HEX);
 			card.gt_sendCommand(command);
@@ -42,10 +42,10 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Send plain ReadBinary command to read the first byte of EF.DG1</Text>
+			<Text>Send plain READ BINARY command to read the first byte of EF.DG1</Text>
 			<APDU sm="false">00 B0 00 00 01</APDU>
 		</Command>
-		<Description>Send ReadBinary command to read first byte of EF.DG1. First byte must be '61' </Description>
+		<Description>Send READ BINARY command to read first byte of EF.DG1. First byte must be '61' </Description>
 		<TechnicalCommand>
 			var command = new ByteString("00 B0 00 00 01", HEX);
 			var dg1 = card.gt_sendCommand(command);
@@ -61,10 +61,10 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Send plain ReadBinary command to read the first byte of EF.DG2</Text>
+			<Text>Send a plain READ BINARY command to read the first byte of EF.DG2</Text>
 			<APDU sm="false">00 B0 82 00 01</APDU>
 		</Command>
-		<Description>Send ReadBinary command to read first byte of EF.DG2. First byte must be '75'</Description>
+		<Description>Send READ BINARY command to read first byte of EF.DG2. First byte must be '75'</Description>
 		<TechnicalCommand>
 			var P1 = "82";
 			var P2 = "00";

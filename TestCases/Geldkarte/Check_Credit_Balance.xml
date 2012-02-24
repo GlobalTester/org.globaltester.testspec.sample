@@ -37,7 +37,7 @@
 			<Text>Select card application with AID</Text>
 			<APDU sm="false">00 A4 04 04 {lc} {aid} {le}</APDU>
 		</Command>
-		<Description>Select the eC card application with following {aid} in a plain SelectApplication APDU</Description>
+		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
 			var aid = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
 			var fci = card.gt_ISO7816_selectAID(aid);

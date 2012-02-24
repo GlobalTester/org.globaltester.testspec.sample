@@ -13,7 +13,7 @@
 	</Precondition>
 	<Precondition>
 		<Command>
-			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
+			<Text>Select the ePassport application with a plain SELECT Application APDU</Text>
 		</Command>	
 		<TechnicalCommand>
 			card.gt_BAC_selectApplicationEPASS();

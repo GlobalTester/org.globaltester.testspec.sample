@@ -16,7 +16,7 @@
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select eID application</Text>
+			<Text>Select the eID application with a plain SELECT Application APDU</Text>
 			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
 		<Description>{aid} defines the application ID</Description>

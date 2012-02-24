@@ -24,7 +24,7 @@
 			var fcp = card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>The select command return a byte string with first byte as '62' identifying FCP template</Text>
+			<Text>The SELECT command return a byte string with first byte as '62' identifying FCP template</Text>
 			<APDU sm="false">{fcp} 90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
@@ -37,13 +37,13 @@
 			<Text>Select card application with AID</Text>
 			<APDU sm="false">00 A4 04 04 {lc} {aid} {le}</APDU>
 		</Command>
-		<Description>Select the eC card application with following {aid} in a plain SelectApplication APDU</Description>
+		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
 			var aid = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
 			var fci = card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>The select command return a byte string with first byte as '6F' identifying FCI template</Text>
+			<Text>The SELECT command return a byte string with first byte as '6F' identifying FCI template</Text>
 			<APDU sm="false">{fci} 90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 

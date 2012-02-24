@@ -16,7 +16,7 @@
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select the Master file with a plain select File command, select eGK EF.DIR under MF</Text>
+			<Text>Select the Master file with a plain SELECT File command, select eGK EF.DIR under MF</Text>
 			<APDU sm="false">00 A4 02 04 {{lc} {fid}} 00</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
@@ -34,10 +34,10 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Try to read record no. 1 if exist</Text>
+			<Text>Try to read record number 1 if exist</Text>
 			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
-		<Description>{record number} defines the underlying record no.</Description>
+		<Description>{record number} defines the underlying record number.</Description>
 		<TechnicalCommand>
 			var command = new ByteString("00 B2 01 04 00", HEX);
 			card.gt_sendCommand(command);
@@ -52,10 +52,10 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Try to read record no. 2 if exist</Text>
+			<Text>Try to read record number 2 if exist.</Text>
 			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
-		<Description>{record number} defines the underlying record no.</Description>
+		<Description>{record number} defines the underlying record number.</Description>
 		<TechnicalCommand>
 			var command = new ByteString("00 B2 02 04 00", HEX);
 			card.gt_sendCommand(command);
@@ -70,10 +70,10 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Try to read record no. 3 if exist</Text>
+			<Text>Try to read record number 3 if exist</Text>
 			<APDU sm="false">00 B2 {record number} 04 {le}</APDU>
 		</Command>
-		<Description>{record number} defines the underlying record no.</Description>
+		<Description>{record number} defines the underlying record number.</Description>
 		<TechnicalCommand>
 			var command = new ByteString("00 B2 03 04 00", HEX);
 			card.gt_sendCommand(command);

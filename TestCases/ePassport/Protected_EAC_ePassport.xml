@@ -15,7 +15,7 @@
 	</Precondition>
 	<Precondition>
 		<Command>
-			<Text>Select the ePassport application with a plain SelectApplication APDU</Text>
+			<Text>Select the ePassport application with a plain SELECT Application APDU</Text>
 		</Command>	
 		<TechnicalCommand>
 			card.gt_BAC_selectApplicationEPASS();
@@ -36,7 +36,7 @@
 			<APDU sm="true">00 B0 {sfid} {offset} {le}</APDU>
 		</Command>
 		<Description>{sfid} defines short file id to implicit select and read binary EF.DG3 with {offset} and expected {le} bytes</Description>
-		<Description>Send ReadBinary command and try to read first byte of EF.DG3.
+		<Description>Send READ BINARY command and try to read first byte of EF.DG3.
 		If the ePassport and the file EF.DG3 is EAC protected the ePassport must return SW '69 82'
 		(Security conditions not fullfilled.</Description>
 		<TechnicalCommand>
@@ -44,7 +44,7 @@
 			var P2 = "00";
 			var le = "01";
 			var command = new ByteString("00 B0 83 00 01", HEX);
-			var dg3 = card.gt_sendCommand(command);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>In the case the EF.DG3 (fingerprints) are EAC protected the ePassport must returns SW '6982'. If ePassport responces with SW '6a82' means file not found</Text>
