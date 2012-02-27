@@ -14,7 +14,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the ePassport application with a plain SELECT Application APDU</Text>
-			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 0C {{lc} {aid}} 00</APDU>
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>

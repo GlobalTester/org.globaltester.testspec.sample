@@ -16,38 +16,36 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the MF (Master File) with returning FCP (file control parameters)</Text>
-			<APDU sm="false">00 A4 00 04 {lc} {fid} {le}</APDU>
+			<APDU sm="false">00 A4 00 0C {lc} {fid} {le}</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
-			var command = new ByteString("00 A4 00 04 02 3F 00 00", HEX);
-			var fcp = card.gt_sendCommand(command);
+			var command = new ByteString("00 A4 00 0C 02 3F 00 00", HEX);
+			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>The SELECT command return a byte string with first byte as '62' identifying FCP template</Text>
-			<APDU sm="false">{fcp} 90 00</APDU>
+			<Text></Text>
+			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("62", fcp.bytes(0,1), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select card application with AID</Text>
-			<APDU sm="false">00 A4 04 04 {lc} {aid} {le}</APDU>
+			<APDU sm="false">00 A4 04 0C {lc} {aid} {le}</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
 			var aid = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
-			var fci = card.gt_ISO7816_selectAID(aid);
+			card.gt_ISO7816_selectAID(aid);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>The SELECT command return a byte string with first byte as '6F' identifying FCI template</Text>
-			<APDU sm="false">{fci} 90 00</APDU>
+			<Text></Text>
+			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
-				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
-				assertMatchValue("6F", fci.bytes(0,1), FAILURE);
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
