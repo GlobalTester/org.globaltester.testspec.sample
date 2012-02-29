@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="SelectApplication_ePassport" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
-	<Title>Select ePassport Applictaion</Title>
+<TestCase id="Select_Protected_SAC_ePassport" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+	<Title>Try to select SAC protected ePassport</Title>
 	<Version>1.00</Version>
-	<Purpose>Select ePassport application</Purpose>
+	<Purpose>Try to identifying if the connected ePassport is assisted the SAC protocol</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition>	
-		<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
+	<Precondition>
+		<Command>
+			<Text>Reset card</Text>
+		</Command>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
@@ -14,7 +17,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the ePassport application with a plain SELECT Application APDU</Text>
-			<APDU sm="false">00 A4 04 0C {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
