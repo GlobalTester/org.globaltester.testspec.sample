@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="Check_Select_Geldkarte" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
-	<Title>Check_Select_Geldkarte</Title>
+	<Title>Select_Geldkarte</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to find out if the attached card is a ec card (eletronic cash - money card)</Purpose>
 	<Profile></Profile>
@@ -16,11 +16,11 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the MF (Master File) with returning FCP (file control parameters)</Text>
-			<APDU sm="false">00 A4 00 0C {lc} {fid} {le}</APDU>
+			<APDU sm="false">00 A4 00 0C {lc} {fid}</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
-			var command = new ByteString("00 A4 00 0C 02 3F 00 00", HEX);
+			var command = new ByteString("00 A4 00 0C 02 3F 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -34,7 +34,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select card application with AID</Text>
-			<APDU sm="false">00 A4 04 0C {lc} {aid} {le}</APDU>
+			<APDU sm="false">00 A4 04 0C {lc} {aid}</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>

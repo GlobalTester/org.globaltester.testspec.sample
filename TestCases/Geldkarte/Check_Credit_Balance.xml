@@ -16,11 +16,11 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the MF (Master File)</Text>
-			<APDU sm="false">00 A4 00 04 {lc} {fid} {le}</APDU>
+			<APDU sm="false">00 A4 00 04 {lc} {fid}</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
-			var command = new ByteString("00 A4 00 0C 02 3F 00 00", HEX);
+			var command = new ByteString("00 A4 00 0C 02 3F 00", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
@@ -34,7 +34,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select card application with AID</Text>
-			<APDU sm="false">00 A4 04 0C {lc} {aid} {le}</APDU>
+			<APDU sm="false">00 A4 04 0C {lc} {aid}</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
@@ -52,11 +52,11 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select record based file with file ID</Text>
-			<APDU sm="false">00 A4 02 0C {lc} {fid} 00</APDU>
+			<APDU sm="false">00 A4 02 0C {lc} {fid}</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
-			var command = new ByteString("00 A4 02 0C 02 01 04 00", HEX);
+			var command = new ByteString("00 A4 02 0C 02 01 04", HEX);
 			card.gt_sendCommand(command);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
