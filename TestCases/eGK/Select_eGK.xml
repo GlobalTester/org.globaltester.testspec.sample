@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="eGK" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+<TestCase id="Select_eGK" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
 	<Title>Try to select and read records on eGK (elektronische Gesundheitskarte)</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to select files and read records on the german eGK (elektronische Gesundheitskarte)</Purpose>
@@ -16,7 +16,7 @@
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select the Master file with a plain SELECT File command, select eGK EF.DIR under MF</Text>
+			<Text>Select the Master file with a plain SELECT File command</Text>
 			<APDU sm="false">00 A4 02 0C {{lc} {fid}} 00</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
@@ -35,7 +35,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to select DF.ESIGN with AID</Text>
-			<APDU sm="false">00 A4 04 0C {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
