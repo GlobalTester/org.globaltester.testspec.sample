@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="Check_Credit_Balance" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
-	<Title>Check_Credit_Balance</Title>
+	<Title>Check credit balance on Geldkarte</Title>
 	<Version>1.00</Version>
-	<Purpose>Try to find out if the attached card is a ec card (eletronic cash - money card)</Purpose>
+	<Purpose>Try to find out if the attached card is a ec card (eletronic cash - money card) and check the money balance</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>
@@ -16,7 +16,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the MF (Master File)</Text>
-			<APDU sm="false">00 A4 00 04 {lc} {fid}</APDU>
+			<APDU sm="false">00 A4 00 0C {lc} {fid}</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
@@ -34,7 +34,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select card application with AID</Text>
-			<APDU sm="false">00 A4 04 0C {lc} {aid}</APDU>
+			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
@@ -52,7 +52,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select record based file with file ID</Text>
-			<APDU sm="false">00 A4 02 0C {lc} {fid}</APDU>
+			<APDU sm="false">00 A4 02 0C {{lc} {fid}}</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
 		<TechnicalCommand>
