@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="Check_Select_Geldkarte" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
-	<Title>Select_Geldkarte</Title>
+<TestCase id="Select_Geldkarte" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+	<Title>Try to select Geldkarte</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to find out if the attached card is a ec card (eletronic cash - money card)</Purpose>
 	<Profile></Profile>
@@ -15,7 +15,7 @@
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select the MF (Master File) with returning FCP (file control parameters)</Text>
+			<Text>Select the MF (Master File)</Text>
 			<APDU sm="false">00 A4 00 0C {lc} {fid}</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
@@ -34,7 +34,7 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select card application with AID</Text>
-			<APDU sm="false">00 A4 04 0C {lc} {aid}</APDU>
+			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
