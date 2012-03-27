@@ -18,10 +18,10 @@
 			<Text>Select the MF (Master File)</Text>
 			<APDU sm="false">00 A4 00 0C {lc} {fid}</APDU>
 		</Command>
-		<Description>{fid} defines the file ID</Description>
+		<Description>{fid} defines the file ID of the MF</Description>
 		<TechnicalCommand>
-			var command = new ByteString("00 A4 00 0C 02 3F 00", HEX);
-			card.gt_sendCommand(command);
+			var ignoreSW = true;
+			card.gt_ISO7816_selectMF(ignoreSW);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
@@ -34,12 +34,13 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select card application with AID</Text>
-			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
+			var ignoreSW = true;
 			var aid = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
-			card.gt_ISO7816_selectAID(aid);
+			card.gt_ISO7816_selectAID(aid, ignoreSW);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
