@@ -33,10 +33,10 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select card application with AID</Text>
+			<Text>Select the eC card application in a plain SELECT Application APDU</Text>
 			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
 		</Command>
-		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
+		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
 			var ignoreSW = true;
 			var aid = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
