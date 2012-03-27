@@ -14,22 +14,84 @@
 			card.gt_reset();
 		</TechnicalCommand>
 	</Precondition>
+	<Precondition>
+		<Description>Select the ePassport application with a plain SELECT Application APDU</Description>
+		<TechnicalCommand>
+			card.gt_BAC_selectApplicationEPASS();
+		</TechnicalCommand>
+	</Precondition>
+	<Precondition>
+		<Description>Perform BAC</Description>
+		<TechnicalCommand>
+			var mrz = card.gt_getCardConfig("ICAO9303","MRZ");
+			card.gt_BAC_performBAC(mrz);
+		</TechnicalCommand>
+	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select the ePassport application with a plain SELECT Application APDU</Text>
-			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
+			<Text>Read encoded EF.DG14 object in binary format from the e-Passport</Text>
 		</Command>
-		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
 			var ignoreSW = true;
-			var aid = "A0 00 00 02 47 10 01";
-			card.gt_ISO7816_selectAID(aid, ignoreSW);
+			var ef_dg14 = card.gt_ISO7816_readFile("0E", ignoreSW);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
 			<APDU sm="false">90 00</APDU>
 			<TechnicalResult>
-				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Check if PACE Info OID exist in EF.DG14</Text>
+		</Command>
+		<TechnicalCommand><![CDATA[
+			// hashtable with all valid PACE OIDs and protocol names
+			htPaceOid = new java.util.Hashtable();
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.1.1", "PACE-DH-GM-3DES-CBC-CBC");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.1.2", "PACE-DH-GM-AES-CBC-CMAC128");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.1.3", "PACE-DH-GM-AES-CBC-CMAC192");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.1.4", "PACE-DH-GM-AES-CBC-CMAC256");
+
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.2.1", "PACE-ECDH-GM-3DES-CBC-CBC");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.2.2", "PACE-ECDH-GM-AES-CBC-CMAC128");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.2.3", "PACE-ECDH-GM-AES-CBC-CMAC192");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.2.4", "PACE-ECDH-GM-AES-CBC-CMAC256");
+
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.3.1", "PACE-DH-IM-3DES-CBC-CBC");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.3.2", "PACE-DH-IM-AES-CBC-CMAC128");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.3.3", "PACE-DH-IM-AES-CBC-CMAC192");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.3.4", "PACE-DH-IM-AES-CBC-CMAC256");
+
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.4.1", "PACE-ECDH-IM-3DES-CBC-CBC");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.4.2", "PACE-ECDH-IM-AES-CBC-CMAC128");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.4.3", "PACE-ECDH-IM-AES-CBC-CMAC192");
+			htPaceOid.put("0.4.0.127.0.7.2.2.4.4.4", "PACE-ECDH-IM-AES-CBC-CMAC256");
+
+			var asnDG14 = new ASN1(ef_dg14);
+			var found_PaceInfo = false;
+			print(asnDG14);
+			
+			for (var i=0; i < asnDG14.get(0).elements; i++) {
+		 		var curElem = asnDG14.get(0).get(i);
+		 	
+		 		print ("");
+				print ("Found ASN1 structure of element with OID: "+curElem.get(0).value.toString(OID)+" in EF.DG14.");
+		 	
+		 		//prepare for following steps
+		 		var curOID = curElem.get(0).value.toString(OID);
+		 	
+		 		if (htPaceOid.containsKey(curOID)) {
+		 			found_PaceInfo = true;
+		 		}
+		 	}
+		]]></TechnicalCommand>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text>For a SAC protected ePassport there MUST be a PACE Info OID found in the EF.DG14 file</Text>
+			<TechnicalResult>
+				assertMatchValue(true, found_PaceInfo, FAILURE); 
 			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
