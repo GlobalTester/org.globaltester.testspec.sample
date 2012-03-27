@@ -34,12 +34,13 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select card application with AID</Text>
-			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
 		</Command>
 		<Description>Select the eC card application with following {aid} in a plain SELECT Application APDU</Description>
 		<TechnicalCommand>
+			var ignoreSW = true;
 			var aid = new ByteString("D2 76 00 00 25 45 50 02 00",HEX); 
-			card.gt_ISO7816_selectAID(aid);
+			card.gt_ISO7816_selectAID(aid,ignoreSW);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
@@ -79,11 +80,10 @@
 		<ExpectedResult xsi:type="APDUResult">
 			<APDU sm="false">90 00</APDU>
 			<Text>The read record command returns a ByteString. In the ByteString the rest on cash money on the card is coded.</Text>
-			<TechnicalResult><![CDATA[
+			<TechnicalResult>
 				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
-				assertBiggerOrEqual("00", response.bytes(1,1), FAILURE); <!-- EUROS -->
-				assertBiggerOrEqual("00", response.bytes(2,1), FAILURE); <!-- CENT  -->
-			]]></TechnicalResult>
+				assertBiggerOrEqual("00 00", response.bytes(1,2), FAILURE);
+			</TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
 </TestCase>
