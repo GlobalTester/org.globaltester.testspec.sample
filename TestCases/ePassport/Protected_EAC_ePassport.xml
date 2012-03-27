@@ -35,10 +35,12 @@
 			<Text>Read first byte of EF.DG3 from ePassport</Text>
 			<APDU sm="true">00 B0 {sfid} {offset} {le}</APDU>
 		</Command>
-		<Description>{sfid} defines short file id to implicit select and read binary EF.DG3 with {offset} and expected {le} bytes</Description>
+		<Description>{sfid} defines short file id to implicit select and read binary EF.DG3</Description>
+		<Description>{offset} defines the offset in the EF.DG3</Description>
+		<Description>{le} defines the expected bytes</Description>
 		<Description>Send READ BINARY command and try to read first byte of EF.DG3.
 		If the ePassport and the file EF.DG3 is EAC protected the ePassport must return SW '69 82'
-		(Security conditions not fullfilled.</Description>
+		(Security conditions not fullfilled).</Description>
 		<TechnicalCommand>
 			var P1 = "83";
 			var P2 = "00";
