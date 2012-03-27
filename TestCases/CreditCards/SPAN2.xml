@@ -17,12 +17,13 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the EMV application with a plain SELECT Application APDU</Text>
-			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
+			ignoreSW = true;
 			var aid = "A0 00 00 02 28";
-			card.gt_ISO7816_selectAID(aid);
+			card.gt_ISO7816_selectAIDgetFCI(aid,ignoreSW);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
