@@ -16,7 +16,7 @@
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Select the Master file with a plain SELECT File command</Text>
+			<Text>Select file with a plain SELECT File command</Text>
 			<APDU sm="false">00 A4 02 0C {{lc} {fid}} 00</APDU>
 		</Command>
 		<Description>{fid} defines the file ID</Description>
