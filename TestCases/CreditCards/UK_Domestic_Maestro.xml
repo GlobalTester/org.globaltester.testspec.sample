@@ -21,7 +21,7 @@
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
-			ignoreSW = true;
+			var ignoreSW = true;
 			var aid = "A0 00 00 00 05";
 			card.gt_ISO7816_selectAIDgetFCI(aid,ignoreSW);
 		</TechnicalCommand>
