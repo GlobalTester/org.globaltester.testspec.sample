@@ -35,12 +35,13 @@
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Try to select DF.ESIGN with AID</Text>
-			<APDU sm="false">00 A4 04 00 {{lc} {aid}} 00</APDU>
+			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
 		</Command>
 		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
+			var ignoreSW = true;
 			var aid = "A0 00 00 01 67 45 53 49 47 4E";
-			card.gt_ISO7816_selectAID(aid);
+			card.gt_ISO7816_selectAID(aid, ignoreSW);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
