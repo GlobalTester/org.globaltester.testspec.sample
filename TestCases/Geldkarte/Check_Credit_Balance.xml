@@ -81,9 +81,9 @@
 			<APDU sm="false">90 00</APDU>
 			<Text>The read record command returns a ByteString. In the ByteString the rest on cash money on the card is coded.</Text>
 			<TechnicalResult>
-				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
-				assertBiggerOrEqual("00 00", response.bytes(1,2), FAILURE);
-			</TechnicalResult>
+                assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE);
+                assertBigger(0, response.byteAt(1)+response.byteAt(2), FAILURE);
+            </TechnicalResult>
 		</ExpectedResult>
 	</TestStep>
 </TestCase>
