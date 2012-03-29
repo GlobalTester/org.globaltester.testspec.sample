@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestUnit id="Unit_CreditCards" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+  <Text>
+  	<Paragraph>This unit covers tests to identify and distuingish different Credit/Debit cards.</Paragraph>
+  </Text>
+  <TestCase>CreditCards/AmericanExpress.xml</TestCase>
+  <TestCase>CreditCards/Banrisul.xml</TestCase>
+  <TestCase>CreditCards/CB_card.xml</TestCase>
+  <TestCase>CreditCards/CoGeBan.xml</TestCase>
+  <TestCase>CreditCards/Dankort.xml</TestCase>
+  <TestCase>CreditCards/Discover.xml</TestCase>
+  <TestCase>CreditCards/Interac.xml</TestCase>
+  <TestCase>CreditCards/JCB.xml</TestCase>
+  <TestCase>CreditCards/LINK_UK.xml</TestCase>
+  <TestCase>CreditCards/MasterCard.xml</TestCase>
+  <TestCase>CreditCards/SPAN2.xml</TestCase>
+  <TestCase>CreditCards/UK_Domestic_Maestro.xml</TestCase>
+  <TestCase>CreditCards/Visa.xml</TestCase>
+  <TestCase>CreditCards/ZKA.xml</TestCase>
+</TestUnit>

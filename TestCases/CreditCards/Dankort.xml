@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="Dankort" xmlns="http://globaltester.org/testspecification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://globaltester.org/schema/testspecification.xsd">
+<TestCase id="Dankort" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
 	<Title>Check select Dankort Card AID</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to select the EMV application with the Dankort Card AID. This is a way of identifying the type of the connected card.</Purpose>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestUnit id="Unit_ePassport" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+  <Text>
+  	<Paragraph>This unit covers all tests about the ePassport and their access conditions.</Paragraph>
+  </Text>
+  <TestCase>ePassport/ePassport_Application.xml</TestCase>
+  <TestCase>ePassport/Protected_BAC_ePassport.xml</TestCase>
+  <TestCase>ePassport/Protected_EAC_ePassport.xml</TestCase>
+  <TestCase>ePassport/Protected_SAC_ePassport.xml</TestCase>
+  <TestCase>ePassport/Unprotected_Plain_ePassport.xml</TestCase>
+</TestUnit>

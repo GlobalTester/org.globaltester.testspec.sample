@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestUnit id="Unit_Geldkarte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+  <Text>
+  	<Paragraph>This unit covers all tests about the german Geldkarte.</Paragraph>
+  </Text>
+  <TestCase>Geldkarte/Geldkarte.xml</TestCase>
+  <TestCase>Geldkarte/Check_Credit_Balance.xml</TestCase>
+</TestUnit>

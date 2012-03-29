@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestUnit id="Unit_nPA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+  <Text>
+  	<Paragraph>This unit covers tests to identify the german ID card (nPA).</Paragraph>
+  </Text>
+  <TestCase>nPA/nPA_Application.xml</TestCase>
+</TestUnit>

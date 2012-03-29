@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TR_03105_PART_3_3 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+	<VersionHistory>
+    <Version>
+      <VersionID>0.10</VersionID>
+      <Date>2012-03-28</Date>
+      <Editor>HJP Consulting GmbH</Editor>
+      <Description>Working Draft</Description>
+    </Version>
+  </VersionHistory>
+
+  <Text>
+  	<Heading level="1">Introduction</Heading>
+		<Paragraph>When working with SmartCards and GlobalTester there is an inherent need for some testcases to prove basic functionality of all components in the system.</Paragraph>
+  		<Paragraph>This TestSpecification defines TestCases that perform checks on card and try to identify the type of card used. Some of the test cases provided here go a step further and do not only identfy the type of card but also some of it's parameters (e.g. supported protocols or available credit).</Paragraph>	
+  </Text>
+  
+  <TestLayer>TestCases/testLayer.xml</TestLayer>
+  </TR_03105_PART_3_3>
