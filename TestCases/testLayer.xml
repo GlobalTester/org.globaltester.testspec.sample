@@ -10,5 +10,6 @@
   <TestUnit>Unit_CreditCards.xml</TestUnit>
   <TestUnit>Unit_ePassport.xml</TestUnit>
   <TestUnit>Unit_Geldkarte.xml</TestUnit>
+  <TestUnit>Unit_eGK.xml</TestUnit>
   <TestUnit>Unit_nPA.xml</TestUnit>
 </TestLayer>
