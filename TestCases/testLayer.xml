@@ -12,4 +12,5 @@
   <TestUnit>Unit_Geldkarte.xml</TestUnit>
   <TestUnit>Unit_eGK.xml</TestUnit>
   <TestUnit>Unit_nPA.xml</TestUnit>
+  <TestUnit>Unit_OpenPGP.xml</TestUnit>
 </TestLayer>
