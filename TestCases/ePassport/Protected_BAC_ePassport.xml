@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="Protected_BAC_ePassport" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+<TestCase id="Protected_BAC_ePassport"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://globaltester.org/testspecification"
+	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
 	<Title>Check if the ePassport is BAC protected</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to identifying if the connected ePassport is a protected BAC ePassport</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>	
-		<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
+		<Command>
+			<Text>Reset card</Text>
+		</Command>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed</Description>
 	</Precondition>
 	<Precondition>
 		<Command>
@@ -29,10 +35,13 @@
 		</TechnicalCommand>
 	</Precondition>
 	<TestStep>
-		<Description>Read encoded EF.DG2 object in binary format from the e-Passport</Description>
+		<Command>
+			<Text>Read EF.DG2 object</Text>
+		</Command>	
 		<TechnicalCommand>
 			var dg2 = card.gt_ISO7816_readFile("02");
 		</TechnicalCommand>
+		<Description>Read encoded EF.DG2 object in binary format from the e-Passport</Description>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text>The returning byte MUST be '75'. Template tag of EF.DG2</Text>
 			<APDU sm="true">75</APDU>

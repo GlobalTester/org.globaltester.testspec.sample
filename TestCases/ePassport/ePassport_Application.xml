@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="ePassport_Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
-	<Title>Try to select ePassport Applictaion</Title>
+<TestCase id="ePassport_Application"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://globaltester.org/testspecification"
+	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	<Title>Try to select ePassport Application</Title>
 	<Version>1.00</Version>
 	<Purpose>Select ePassport application</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>	
-		<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
+		<Command>
+			<Text>Reset card</Text>
+		</Command>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed</Description>
 	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
 			<Text>Select the ePassport application with a plain SELECT Application APDU</Text>
 			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
 		</Command>
-		<Description>{aid} defines the application ID</Description>
 		<TechnicalCommand>
 			var ignoreSW = true;
 			var aid = "A0 00 00 02 47 10 01";
 			card.gt_ISO7816_selectAID(aid,ignoreSW);
 		</TechnicalCommand>
+		<Description>{aid} defines the application ID</Description>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
 			<APDU sm="false">90 00</APDU>

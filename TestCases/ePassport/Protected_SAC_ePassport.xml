@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="SAC_ePassport" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+<TestCase id="SAC_ePassport"
+	xmlns="http://globaltester.org/testspecification"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
 	<Title>Try to select SAC protected ePassport</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to identifying if the connected ePassport is assisted the SAC protocol</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition>
+	<Precondition>	
 		<Command>
 			<Text>Reset card</Text>
 		</Command>
-		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed</Description>
 	</Precondition>
 	<Precondition>
 		<Description>Select the ePassport application with a plain SELECT Application APDU</Description>

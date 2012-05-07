@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="Unprotected_Plain_ePassport" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bsi.bund.de/TR03105 ../schema/TR03105_Part_3_3.xsd">
+<TestCase id="Unprotected_Plain_ePassport"
+	xmlns="http://globaltester.org/testspecification"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
 	<Title>Check if the ePassport is unprotected (PLAIN)</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to identifying if the ePassport is unprotected (Plain ePassport)</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
-	<Precondition>
+	<Precondition>	
 		<Command>
 			<Text>Reset card</Text>
 		</Command>
-		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
 		<TechnicalCommand>
 			card.gt_reset();
 		</TechnicalCommand>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed</Description>
 	</Precondition>
 	<Precondition>
 		<Command>
@@ -27,12 +30,11 @@
 			<Text>Select file EF.DG1 with {fid}</Text>
 			<APDU sm="false">00 A4 02 0C {{lc} {fid}}</APDU>
 		</Command>
-		<Description>{fid} select file with file ID</Description>
-		<Description>Select the file EF.DG1 with a plain SELECT file APDU</Description>
 		<TechnicalCommand>
 			var ignoreSW = true;
 			card.gt_ISO7816_selectFile("01",ignoreSW);
 		</TechnicalCommand>
+		<Description>{fid} select file with file ID</Description>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
 			<APDU sm="false">90 00</APDU>
@@ -46,11 +48,11 @@
 			<Text>Send plain READ BINARY command to read the first byte of EF.DG1</Text>
 			<APDU sm="false">00 B0 00 00 01</APDU>
 		</Command>
-		<Description>Send READ BINARY command to read first byte of EF.DG1. First byte must be '61' </Description>
 		<TechnicalCommand>
 			var command = new ByteString("00 B0 00 00 01", HEX);
 			var dg1 = card.gt_sendCommand(command);
 		</TechnicalCommand>
+		<Description>Send READ BINARY command to read first byte of EF.DG1. First byte must be '61' </Description>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
 			<APDU sm="false">61 90 00</APDU>
@@ -65,7 +67,6 @@
 			<Text>Send a plain READ BINARY command to read the first byte of EF.DG2</Text>
 			<APDU sm="false">00 B0 82 00 01</APDU>
 		</Command>
-		<Description>Send READ BINARY command to read first byte of EF.DG2. First byte must be '75'</Description>
 		<TechnicalCommand>
 			var P1 = "82";
 			var P2 = "00";
@@ -73,6 +74,7 @@
 			var command = new ByteString("00 B0 82 00 01", HEX);
 			var dg2 = card.gt_sendCommand(command);
 		</TechnicalCommand>
+		<Description>Send READ BINARY command to read first byte of EF.DG2. First byte must be '75'</Description>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
 			<APDU sm="false">75 90 00</APDU>
