@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestUnit id="Unit_KVK"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://globaltester.org/testspecification"
+	xsi:schemaLocation="http://globaltester.org/testspecification ../schema/TestSpecification.xsd">
+  <Text>
+  	<Paragraph>This unit covers all tests about the german KVK.</Paragraph>
+  </Text>
+  <TestCase>KVK/KVK.xml</TestCase>
+</TestUnit>
