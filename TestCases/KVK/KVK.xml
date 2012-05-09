@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase id="KVK" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://globaltester.org/testspecification"
+	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	<Title>Try to select application on german health card (Krankenversicherungskarte, KVK)</Title>
+	<Version>1.00</Version>
+	<Purpose>Try to select application on the german health card (Krankenversicherungskarte, KVK)</Purpose>
+	<Profile></Profile>
+	<Reference></Reference>
+	<Precondition>
+		<Command>
+			<Text>Reset card</Text>
+		</Command>
+		<TechnicalCommand>
+			card.gt_reset();
+		</TechnicalCommand>
+		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed.</Description>
+	</Precondition>
+	<TestStep>
+		<Command xsi:type="APDUCommand">
+			<Text>Try to select KVK with AID</Text>
+			<APDU sm="false">00 A4 04 0C {{lc} {aid}}</APDU>
+		</Command>
+		<TechnicalCommand>
+			var ignoreSW = true;
+			var aid = "D2 76 00 00 01 01";
+			card.gt_ISO7816_selectAID(aid, ignoreSW);
+		</TechnicalCommand>
+		<Description>{aid} defines the application ID</Description>
+		<ExpectedResult xsi:type="APDUResult">
+			<Text></Text>
+			<APDU sm="false">90 00</APDU>
+			<TechnicalResult>
+				assertStatusWord(SW_NoError, card.SW.toString(HEX), FAILURE); 
+			</TechnicalResult>
+		</ExpectedResult>
+	</TestStep>
+</TestCase>
