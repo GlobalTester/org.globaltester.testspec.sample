@@ -3,9 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://globaltester.org/testspecification"
 	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
-	<Title>Try to select application on german health card (Krankenversicherungskarte, KVK)</Title>
+	<Title>Try to select application on german health insurance card (Krankenversicherungskarte, KVK)</Title>
 	<Version>1.00</Version>
-	<Purpose>Try to select application on the german health card (Krankenversicherungskarte, KVK)</Purpose>
+	<Purpose>Try to select application on the german health insurance card (Krankenversicherungskarte, KVK)</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>
