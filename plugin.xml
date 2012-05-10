@@ -5,7 +5,7 @@
          point="org.globaltester.testspecification.importables">
       <testspec
             bundle="org.globaltester.testspec.sample"
-            descr="This is NOT a conformity test specification of a smart card. You can run this testcases e.g. - on your ePassport, on your credit card, on the german eGK (elektronisch Gesundheitskarte) and on your Geldkarte (EC Card) for example."
+            descr="This sample test specification includes several testcases that try to identfy the type of card used. There exist testcases that identify ePassports, several credit cards and many more. But be aware that this test specification does not claim to validate the card. Passing tests are a strong indication that the sample can be used for the given purpose but no guarantees are given."
             name="GlobalTester Sample TestSpecification">
       </testspec>
    </extension>
