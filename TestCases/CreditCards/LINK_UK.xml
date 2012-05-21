@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="LINK_UK"
 	xmlns="http://globaltester.org/testspecification"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Title>Check select LINK (UK) Card AID</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to select the EMV application with the LINK (UK) Card AID. This is a way of identifying the type of the connected card.</Purpose>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="eGK" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://globaltester.org/testspecification"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	xmlns="http://globaltester.org/testspecification">
 	<Title>Try to select application on eGK (elektronische Gesundheitskarte)</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to select application on the german eGK (elektronische Gesundheitskarte)</Purpose>

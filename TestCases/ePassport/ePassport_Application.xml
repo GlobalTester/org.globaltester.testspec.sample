@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="ePassport_Application"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://globaltester.org/testspecification"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	xmlns="http://globaltester.org/testspecification">
 	<Title>Try to select ePassport Application</Title>
 	<Version>1.00</Version>
 	<Purpose>Select ePassport application</Purpose>

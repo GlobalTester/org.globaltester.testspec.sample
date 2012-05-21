@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSpecification
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://globaltester.org/testspecification"
-	xsi:schemaLocation="http://globaltester.org/testspecification schema/TestSpecification.xsd">
+	xmlns="http://globaltester.org/testspecification">
   <VersionHistory>
     <Version>
       <VersionID>0.10</VersionID>

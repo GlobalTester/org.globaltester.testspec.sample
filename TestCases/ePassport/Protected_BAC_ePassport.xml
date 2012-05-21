@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="Protected_BAC_ePassport"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://globaltester.org/testspecification"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	xmlns="http://globaltester.org/testspecification">
 	<Title>Check if the ePassport is BAC protected</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to identifying if the connected ePassport is a protected BAC ePassport</Purpose>

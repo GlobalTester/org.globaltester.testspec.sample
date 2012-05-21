@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="UK_Domestic_Maestro"
 	xmlns="http://globaltester.org/testspecification"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Title>Check select UK Domestic Maestro AID</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to select the EMV application with the UK Domestic Maestro Card AID. This is a way of identifying the type of the connected card.</Purpose>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="Geldkarte"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://globaltester.org/testspecification"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	xmlns="http://globaltester.org/testspecification">
 	<Title>Try to select Geldkarte</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to find out if the attached card is a ec card (eletronic cash - money card)</Purpose>

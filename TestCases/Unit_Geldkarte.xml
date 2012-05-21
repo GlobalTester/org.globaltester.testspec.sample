@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestUnit id="Unit_Geldkarte"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://globaltester.org/testspecification"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../schema/TestSpecification.xsd">
+	xmlns="http://globaltester.org/testspecification">
   <Text>
   	<Paragraph>This unit covers all tests about the german Geldkarte.</Paragraph>
   </Text>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCase id="Unprotected_Plain_ePassport"
 	xmlns="http://globaltester.org/testspecification"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://globaltester.org/testspecification ../../schema/TestSpecification.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Title>Check if the ePassport is unprotected (PLAIN)</Title>
 	<Version>1.00</Version>
 	<Purpose>Try to identifying if the ePassport is unprotected (Plain ePassport)</Purpose>
