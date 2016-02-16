@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: GlobalTester Sample TestSpecification
+Bundle-Name: GT TestSpec Sample
 Bundle-SymbolicName: org.globaltester.testspec.sample;singleton:=true
 Bundle-Version: 3.0.3
 Bundle-Vendor: HJP Consulting GmbH
