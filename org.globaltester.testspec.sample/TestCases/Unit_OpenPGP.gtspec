@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestUnit id="Unit_KVK"
+<TestUnit id="Unit_OpenPGP"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://globaltester.org/testspecification">
   <Text>
-  	<Paragraph>This unit covers all tests about the german KVK.</Paragraph>
+  	<Paragraph>This unit covers all tests about the OpenPGP card.</Paragraph>
   </Text>
-  <TestCase>KVK/KVK.xml</TestCase>
+  <TestCase>OpenPGP/OpenPGP.gt</TestCase>
 </TestUnit>

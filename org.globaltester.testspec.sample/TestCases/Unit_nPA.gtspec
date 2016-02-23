@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestUnit id="Unit_eGK"
+<TestUnit id="Unit_nPA"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://globaltester.org/testspecification">
   <Text>
-  	<Paragraph>This unit covers all tests about the german eGK.</Paragraph>
+  	<Paragraph>This unit covers tests to identify the german ID card (nPA).</Paragraph>
   </Text>
-  <TestCase>eGK/eGK.xml</TestCase>
+  <TestCase>nPA/nPA_Application.gt</TestCase>
 </TestUnit>

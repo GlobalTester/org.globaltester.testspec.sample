@@ -5,6 +5,6 @@
   <Text>
   	<Paragraph>This unit covers all tests about the german Geldkarte.</Paragraph>
   </Text>
-  <TestCase>Geldkarte/Geldkarte.xml</TestCase>
-  <TestCase>Geldkarte/Check_Credit_Balance.xml</TestCase>
+  <TestCase>Geldkarte/Geldkarte.gt</TestCase>
+  <TestCase>Geldkarte/Check_Credit_Balance.gt</TestCase>
 </TestUnit>
