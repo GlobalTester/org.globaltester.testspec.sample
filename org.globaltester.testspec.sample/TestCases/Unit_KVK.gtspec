@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestUnit id="Unit_nPA"
+<TestUnit id="Unit_KVK"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://globaltester.org/testspecification">
   <Text>
-  	<Paragraph>This unit covers tests to identify the german ID card (nPA).</Paragraph>
+  	<Paragraph>This unit covers all tests about the german KVK.</Paragraph>
   </Text>
-  <TestCase>nPA/nPA_Application.xml</TestCase>
+  <TestCase>KVK/KVK.gt</TestCase>
 </TestUnit>

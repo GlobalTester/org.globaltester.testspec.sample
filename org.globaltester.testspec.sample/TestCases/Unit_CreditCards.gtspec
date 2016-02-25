@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestUnit id="Unit_CreditCards"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://globaltester.org/testspecification">
+  <Text>
+  	<Paragraph>This unit covers tests to identify and distuingish different Credit/Debit cards.</Paragraph>
+  </Text>
+  <TestCase>CreditCards/AmericanExpress.gt</TestCase>
+  <TestCase>CreditCards/Banrisul.gt</TestCase>
+  <TestCase>CreditCards/CB_card.gt</TestCase>
+  <TestCase>CreditCards/CoGeBan.gt</TestCase>
+  <TestCase>CreditCards/Dankort.gt</TestCase>
+  <TestCase>CreditCards/Discover.gt</TestCase>
+  <TestCase>CreditCards/Interac.gt</TestCase>
+  <TestCase>CreditCards/JCB.gt</TestCase>
+  <TestCase>CreditCards/LINK_UK.gt</TestCase>
+  <TestCase>CreditCards/MasterCard.gt</TestCase>
+  <TestCase>CreditCards/SPAN2.gt</TestCase>
+  <TestCase>CreditCards/UK_Domestic_Maestro.gt</TestCase>
+  <TestCase>CreditCards/Visa.gt</TestCase>
+  <TestCase>CreditCards/ZKA.gt</TestCase>
+</TestUnit>

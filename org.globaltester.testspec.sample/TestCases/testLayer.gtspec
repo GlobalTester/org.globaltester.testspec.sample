@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestLayer id="Layer_Id"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://globaltester.org/testspecification">
+  <Text>
+  	<Heading level="1">Tests for card identification (Layers 6 and 7)</Heading>
+  </Text>
+  
+  <TestUnit>Unit_CreditCards.gtspec</TestUnit>
+  <TestUnit>Unit_ePassport.gtspec</TestUnit>
+  <TestUnit>Unit_Geldkarte.gtspec</TestUnit>
+  <TestUnit>Unit_eGK.gtspec</TestUnit>
+  <TestUnit>Unit_KVK.gtspec</TestUnit>
+  <TestUnit>Unit_nPA.gtspec</TestUnit>
+  <TestUnit>Unit_OpenPGP.gtspec</TestUnit>
+</TestLayer>

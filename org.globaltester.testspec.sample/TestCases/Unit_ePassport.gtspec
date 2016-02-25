@@ -5,9 +5,9 @@
   <Text>
   	<Paragraph>This unit covers all tests about the ePassport and their access conditions.</Paragraph>
   </Text>
-  <TestCase>ePassport/ePassport_Application.xml</TestCase>
-  <TestCase>ePassport/Protected_BAC_ePassport.xml</TestCase>
-  <TestCase>ePassport/Protected_EAC_ePassport.xml</TestCase>
-  <TestCase>ePassport/Protected_SAC_ePassport.xml</TestCase>
-  <TestCase>ePassport/Unprotected_Plain_ePassport.xml</TestCase>
+  <TestCase>ePassport/ePassport_Application.gt</TestCase>
+  <TestCase>ePassport/Protected_BAC_ePassport.gt</TestCase>
+  <TestCase>ePassport/Protected_EAC_ePassport.gt</TestCase>
+  <TestCase>ePassport/Protected_SAC_ePassport.gt</TestCase>
+  <TestCase>ePassport/Unprotected_Plain_ePassport.gt</TestCase>
 </TestUnit>
