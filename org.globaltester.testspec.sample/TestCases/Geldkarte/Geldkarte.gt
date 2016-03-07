@@ -9,6 +9,15 @@
 	<Reference></Reference>
 	<Precondition>
 		<Command>
+			<Text>Set environment</Text>
+		</Command>
+		<TechnicalCommand>
+			Packages.org.globaltester.testrunner.TestRunnerEnvironmentInitializer.setEnvironment(getRunnerInstance());
+		</TechnicalCommand>
+		<Description></Description>
+	</Precondition>
+	<Precondition>
+		<Command>
 			<Text>Perform a cold reset of the card in order to ensure all temporary data is removed</Text>
 		</Command>
 		<TechnicalCommand>
