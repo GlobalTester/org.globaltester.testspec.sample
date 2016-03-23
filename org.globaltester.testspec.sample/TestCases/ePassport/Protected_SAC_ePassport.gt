@@ -7,6 +7,15 @@
 	<Purpose>Try to identifying if the connected ePassport is assisted the SAC protocol</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
+	<Precondition>
+		<Command>
+			<Text>Set environment</Text>
+		</Command>
+		<TechnicalCommand>
+			Packages.org.globaltester.testrunner.TestRunnerEnvironmentInitializer.setEnvironment(getRunnerInstance());
+		</TechnicalCommand>
+		<Description></Description>
+	</Precondition>
 	<Precondition>	
 		<Command>
 			<Text>Reset card</Text>
