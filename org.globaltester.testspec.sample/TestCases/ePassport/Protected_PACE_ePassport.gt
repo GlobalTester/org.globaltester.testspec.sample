@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestCase id="SAC_ePassport"
+<TestCase id="PACE_ePassport"
 	xmlns="http://globaltester.org/testspecification"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<Title>Try to select SAC protected ePassport</Title>
+	<Title>Try to select PACE protected ePassport</Title>
 	<Version>1.00</Version>
-	<Purpose>Try to identifying if the connected ePassport is assisted the SAC protocol</Purpose>
+	<Purpose>Try to identifying if the connected ePassport is assisted the PACE protocol</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>
@@ -100,7 +100,7 @@
 		 	}
 		]]></TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>For a SAC protected ePassport there MUST be a PACE Info OID found in the EF.DG14 file</Text>
+			<Text>For a PACE protected ePassport there MUST be a PACE Info OID found in the EF.DG14 file</Text>
 			<TechnicalResult>
 				assertMatchValue(true, found_PaceInfo, FAILURE); 
 			</TechnicalResult>

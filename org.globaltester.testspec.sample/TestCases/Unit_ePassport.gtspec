@@ -8,6 +8,6 @@
   <TestCase>ePassport/ePassport_Application.gt</TestCase>
   <TestCase>ePassport/Protected_BAC_ePassport.gt</TestCase>
   <TestCase>ePassport/Protected_EAC_ePassport.gt</TestCase>
-  <TestCase>ePassport/Protected_SAC_ePassport.gt</TestCase>
+  <TestCase>ePassport/Protected_PACE_ePassport.gt</TestCase>
   <TestCase>ePassport/Unprotected_Plain_ePassport.gt</TestCase>
 </TestUnit>
