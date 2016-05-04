@@ -38,7 +38,7 @@
 			<Text>Perform BAC</Text>
 		</Command>	
 		<TechnicalCommand>
-			var mrz = card.gt_getSampleConfig("ICAO9303","MRZ");
+			var mrz = card.gt_getSampleConfig("MRZ","MRZ");
 			card.gt_BAC_performBAC(mrz);
 		</TechnicalCommand>
 	</Precondition>
