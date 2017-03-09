@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Title>Try to select PACE protected ePassport</Title>
 	<Version>1.00</Version>
-	<Purpose>Try to identifying if the connected ePassport is assisted the PACE protocol</Purpose>
+	<Purpose>Try to identify if the connected ePassport supports the PACE protocol</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>
@@ -25,26 +25,13 @@
 		</TechnicalCommand>
 		<Description>Perform a cold reset of the card in order to ensure all temporary data is removed</Description>
 	</Precondition>
-	<Precondition>
-		<Description>Select the ePassport application with a plain SELECT Application APDU</Description>
-		<TechnicalCommand>
-			card.gt_BAC_selectApplicationEPASS();
-		</TechnicalCommand>
-	</Precondition>
-	<Precondition>
-		<Description>Perform BAC</Description>
-		<TechnicalCommand>
-			var mrz = card.gt_getSampleConfig("MRZ","MRZ");
-			card.gt_BAC_performBAC(mrz);
-		</TechnicalCommand>
-	</Precondition>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Read encoded EF.DG14 object in binary format from the e-Passport</Text>
+			<Text>Read encoded EF.CardAccess object in binary format from the e-Passport</Text>
 		</Command>
 		<TechnicalCommand>
 			var ignoreSW = true;
-			var ef_dg14 = card.gt_ISO7816_readFile("0E", ignoreSW);
+			var ef_cardaccess = card.gt_ISO7816_readFile("1C", ignoreSW);
 		</TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
 			<Text></Text>
@@ -56,7 +43,7 @@
 	</TestStep>
 	<TestStep>
 		<Command xsi:type="APDUCommand">
-			<Text>Check if PACE Info OID exist in EF.DG14</Text>
+			<Text>Check if PACE Info OID exist in EF.CardAccess</Text>
 		</Command>
 		<TechnicalCommand><![CDATA[
 			// hashtable with all valid PACE OIDs and protocol names
@@ -81,18 +68,18 @@
 			htPaceOid.put("0.4.0.127.0.7.2.2.4.4.3", "PACE-ECDH-IM-AES-CBC-CMAC192");
 			htPaceOid.put("0.4.0.127.0.7.2.2.4.4.4", "PACE-ECDH-IM-AES-CBC-CMAC256");
 
-			var asnDG14 = new ASN1(ef_dg14);
+			var asnEFCA = new ASN1(ef_cardaccess);
 			var found_PaceInfo = false;
-			print(asnDG14);
+			print(asnEFCA);
 			
-			for (var i=0; i < asnDG14.get(0).elements; i++) {
-		 		var curElem = asnDG14.get(0).get(i);
+			for (var i=0; i < asnEFCA.elements; i++) {
+		 		var curElem = asnEFCA.get(i);
 		 	
-		 		print ("");
-				print ("Found ASN1 structure of element with OID: "+curElem.get(0).value.toString(OID)+" in EF.DG14.");
-		 	
-		 		//prepare for following steps
 		 		var curOID = curElem.get(0).value.toString(OID);
+
+		 		print ("");
+				print ("Found ASN1 structure of element with OID: "+ curOID+" in EF.CardAccess.");
+		 	
 		 	
 		 		if (htPaceOid.containsKey(curOID)) {
 		 			found_PaceInfo = true;
@@ -100,7 +87,7 @@
 		 	}
 		]]></TechnicalCommand>
 		<ExpectedResult xsi:type="APDUResult">
-			<Text>For a PACE protected ePassport there MUST be a PACE Info OID found in the EF.DG14 file</Text>
+			<Text>For a PACE protected ePassport there MUST be a PACE Info OID found in the EF.CardAccess file</Text>
 			<TechnicalResult>
 				assertMatchValue(true, found_PaceInfo, FAILURE); 
 			</TechnicalResult>

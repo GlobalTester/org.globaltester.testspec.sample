@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Title>Check if the ePassport is unprotected (PLAIN)</Title>
 	<Version>1.00</Version>
-	<Purpose>Try to identifying if the ePassport is unprotected (Plain ePassport)</Purpose>
+	<Purpose>Try to identify if the ePassport is unprotected (Plain ePassport)</Purpose>
 	<Profile></Profile>
 	<Reference></Reference>
 	<Precondition>
